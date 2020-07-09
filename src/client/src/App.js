@@ -131,7 +131,7 @@ function fetchTranslation(hiragana) {
     }),
   };
 
-  return fetch("http://localhost:9000/translate", requestOptions)
+  return fetch("/translate", requestOptions)
     .then(response => response.json());
 }
 
