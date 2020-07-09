@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      textCopied: false,
       hiraganaOutput: '',
       translation: '',
       prevHiragana: '',
@@ -20,9 +21,10 @@ class App extends React.Component {
       this.debouncedHandleKeyUp = _.debounce(() => {
         if (!e.target.value) {
           this.setState(prevState => ({
+            textCopied: false,
             hiraganaOutput: '',
             translation: '',
-            prevHiragana: prevState.hiraganaOutput,
+            prevHiragana: '',
           }));
           return;
         }
@@ -33,6 +35,7 @@ class App extends React.Component {
         }
 
         this.setState(prevState => ({
+          textCopied: false,
           hiraganaOutput: hiragana,
           translation: prevState.translation,
           prevHiragana: prevState.hiraganaOutput
@@ -41,33 +44,45 @@ class App extends React.Component {
         fetchTranslation(hiragana)
           .then(data => {
             this.setState(prevState => ({
+              textCopied: false,
               hiraganaOutput: hiragana,
               translation: data.message.result.translatedText,
               prevHiragana: hiragana,
             }));
           });
-      }, 400);
+      }, 500);
     }
 
     this.debouncedHandleKeyUp();
   }
 
+  handleOnCopyClick(e) {
+    navigator.clipboard.writeText(this.state.hiraganaOutput)
+      .then(() => {
+        let newState = _.cloneDeep(this.state);
+        newState.textCopied = true;
+        this.setState(newState);
+        console.warn('copied');
+      });
+  }
+
   render() {
-    return ( <
-      div className = "wrapper" >
-      <
-      input type = "text"
-      onKeyUp = {
-        (e) => this.handleKeyUp(e)
-      }
-      /> <
-      div className = "hiraganaOutput" > 히라가나: {
-        this.state.hiraganaOutput
-      } < /div> <
-      div className = "translation" > 한국어: {
-        this.state.translation
-      } < /div> <
-      /div>
+    return (<div className="wrapper">
+      <input type="text"
+        onKeyUp={(e) => this.handleKeyUp(e)}
+      />
+      <div className="section">히라가나:
+        <button className="copyButton"
+          disabled={this.state.textCopied}
+          onClick={(e) => this.handleOnCopyClick(e)}>
+          {this.state.textCopied ? 'Copied!' : 'Copy'}
+        </button>
+        <div className="copyableText">{this.state.hiraganaOutput}</div>
+      </div>
+      <div className="section">한국어:
+        <div className="copyableText">{this.state.translation}</div>
+      </div>
+      </div>
     );
   }
 }
