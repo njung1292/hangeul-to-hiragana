@@ -10,6 +10,12 @@ function AppTemplate() {
         ref={this.textareaRef}
         onChange={this.handleInputChange}/>
       <button className="clear-btn" onClick={this.handleClear}>Clear</button>
+      <input type="checkbox" 
+        name="debugMode"
+        className="debug-mode-checkbox" 
+        value={this.state.debugMode} 
+        onChange={this.handleDebugMode}/>
+      <label htmlFor="debugMode">Debug mode</label>
       <div className="section">
         Hiragana:
         <div className="output">

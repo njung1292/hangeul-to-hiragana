@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      debugMode: false,
       hiraganaCopied: false,
       translationCopied: false,
       hiraganaOutput: '',
@@ -19,6 +20,7 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnCopyHiragana = this.handleOnCopyHiragana.bind(this);
     this.handleOnCopyTranslation = this.handleOnCopyTranslation.bind(this);
+    this.handleDebugMode = this.handleDebugMode.bind(this);
 
     // DOM Refs
     this.textareaRef = React.createRef();
@@ -71,6 +73,11 @@ class App extends React.Component {
           hiraganaCopied: true,
           translationCopied: false
         });
+      })
+      .catch((e) => {
+        if (this.state.debugMode) {
+          alert(e);
+        }
       });
   }
 
@@ -81,7 +88,16 @@ class App extends React.Component {
           hiraganaCopied: false,
           translationCopied: true
         });
+      })  
+      .catch((e) => {
+        if (this.state.debugMode) {
+          alert(e);
+        }
       });
+  }
+
+  handleDebugMode() {
+    this.setState((prevState) => ({debugMode: !prevState.debugMode}));
   }
 
   render() {
