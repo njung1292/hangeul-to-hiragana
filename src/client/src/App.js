@@ -37,7 +37,6 @@ class App extends React.Component {
         const hiragana = hangeulConverter.convertHangeulToHiragana(e.target.value);
 
         if (hiragana === this.state.prevHiragana) {
-          console.warn('not requesting');
           return;
         }
 
