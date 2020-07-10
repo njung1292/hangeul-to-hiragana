@@ -12,14 +12,6 @@ textarea {
   box-sizing: border-box;
 }
 
-.debug-mode-checkbox {
-  margin-left: 32px;
-}
-
-label {
-  font-size: 12px;
-}
-
 .wrapper {
   max-width: 600px;
 }
