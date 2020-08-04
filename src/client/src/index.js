@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import HangeulToHiraganaApp from './hangeulToHiragana/App';
 import TamaItemGuideApp from './tamaItemGuide/App';
 
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    
+
     <TamaItemGuideApp />
 
   </React.StrictMode>,
