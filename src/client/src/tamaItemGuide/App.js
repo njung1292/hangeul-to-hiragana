@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import AppTemplate from './AppTemplate';
 import {getItemsForTamas} from './getItemsForTamas';
 import TAMA_LIST from './tamaList';
@@ -10,26 +9,12 @@ class App extends React.Component {
     this.state = {
       tamas: TAMA_LIST,
       result: []
-      // selectedTamas: {},
-      // clipboardEnabled: !!navigator.clipboard,
-      // hiraganaCopied: false,
-      // translationCopied: false,
-      // hiraganaOutput: '',
-      // translation: '',
-      // prevHiragana: '',
     };
 
     // Event handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTamaSelected = this.handleTamaSelected.bind(this);
     this.handleReset = this.handleReset.bind(this);
-    // this.handleClear = this.handleClear.bind(this);
-    // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleOnCopyHiragana = this.handleOnCopyHiragana.bind(this);
-    // this.handleOnCopyTranslation = this.handleOnCopyTranslation.bind(this);
-
-    // DOM Refs
-    // this.textareaRef = React.createRef();
   }
 
   handleReset(event) {
@@ -42,8 +27,6 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log("Submit!");
-    console.log(this.state);
     event.preventDefault();
 
     this.setState({
@@ -64,31 +47,6 @@ class App extends React.Component {
   render() {
     return AppTemplate.call(this);
   }
-
-  // _resetState() {
-  //   this.setState({
-  //     hiraganaCopied: false,
-  //     translationCopied: false,
-  //     hiraganaOutput: '',
-  //     prevHiragana: '',
-  //     translation: '',
-  //   });
-  // }
-  //
-  // _fetchTranslation(hiragana) {
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       'query': hiragana
-  //     }),
-  //   };
-  //
-  //   return fetch("/translate", requestOptions)
-  //     .then(response => response.json());
-  // }
 }
 
 export default App;
