@@ -1,0 +1,32 @@
+body {
+  font: 20px sans-serif;
+  margin: 20px;
+}
+
+.tama-list-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tama-select {
+  width: 152px;
+  height: 120px;
+  margin: 8px;
+}
+
+.tama-select.selected {
+  background: #31b0d5;
+}
+
+.tama-select input {
+  display: none;
+}
+
+.tama-image {
+  display: block;
+  margin: auto;
+}
+
+.tama-name {
+  margin: 0;
+}

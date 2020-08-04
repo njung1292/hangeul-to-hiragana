@@ -4,7 +4,8 @@ import './App.css';
 function AppTemplate() {
   return (
     <div className="wrapper">
-      <textarea type="text" 
+      <h1>Hangeul to Hiragana Converter</h1>
+      <textarea type="text"
         maxLength="5000"
         placeholder="Type something"
         ref={this.textareaRef}
