@@ -14,19 +14,32 @@ function getItemsForTamasHelper(tamas, items) {
     return items;
   }
 
-  const allFavoriteItems = _
+  // Satisfy "picky" tamas first (the ones that only have 1 favorite item)
+  const pickyTamas = _.remove(tamas, tama => tama.favoriteItems.length === 1);
+
+  if (pickyTamas.length > 0) {
+    _.chain(pickyTamas)
+    .map('favoriteItems')
+    .flatten()
+    .uniq()
+    .value()
+    .forEach(item => items.push(item));
+
+    // Remove tamas that are satisfied by the picky tama choices
+    _.remove(tamas, tama => hasCommonItem(tama.favoriteItems, items));
+  }
+
+  const mostFreqFavoriteItem = _
     .chain(tamas)
     .map('favoriteItems')
     .flatten()
-    .union()
-    .value()
-    .sort((a, b) => {
-      const aScore = tamas.filter(tama => _.includes(tama.favoriteItems, a)).length;
-      const bScore = tamas.filter(tama => _.includes(tama.favoriteItems, b)).length;
-      return bScore - aScore;
-    });
+    .countBy()
+    .toPairs()
+    .maxBy(_.last)
+    .head()
+    .value();
 
-  items.push(allFavoriteItems[0]);
+  items.push(mostFreqFavoriteItem);
 
   return getItemsForTamasHelper(
     tamas.filter(tama => !hasCommonItem(tama.favoriteItems, items)),
