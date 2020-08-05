@@ -1,7 +1,9 @@
 import _ from 'lodash';
+import {ITEMS_BY_ID} from './itemList';
 
 export function getItemsForTamas(tamas) {
-  return getItemsForTamasHelper(tamas, []);
+  const itemIds = getItemsForTamasHelper(tamas, []);
+  return _.sortBy(_.map(itemIds, id => ITEMS_BY_ID[id]), 'displayName');
 }
 
 function getItemsForTamasHelper(tamas, items) {

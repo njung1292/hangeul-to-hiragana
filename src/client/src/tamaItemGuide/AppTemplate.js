@@ -27,7 +27,7 @@ function AppTemplate() {
       <p>Result</p>
       <div>
         {this.state.result.map((item, i) =>
-          <div key={i}>{item}</div>
+          <div key={i}>{item.displayName}</div>
         )}
       </div>
     </div>
