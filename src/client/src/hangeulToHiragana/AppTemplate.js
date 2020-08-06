@@ -7,7 +7,7 @@ function AppTemplate() {
       <h1>Hangeul to Hiragana Converter</h1>
       <textarea type="text"
         maxLength="5000"
-        placeholder="Type something"
+        placeholder="오마에와 모 신데이루"
         ref={this.textareaRef}
         onChange={this.handleInputChange}/>
       <button className="clear-btn" onClick={this.handleClear}>Clear</button>
